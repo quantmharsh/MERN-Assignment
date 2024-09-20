@@ -1,5 +1,6 @@
 import express from "express";
-import { getbyemail } from "../controllers/userController.js";
+import { createUser, getbyemail } from "../controllers/userController.js";
 const router=express.Router();
 router.post("/getbyemail" ,getbyemail)
+router.post('/create' ,createUser);
 export default router;

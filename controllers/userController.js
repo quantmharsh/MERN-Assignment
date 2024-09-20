@@ -50,4 +50,22 @@ const getbyemail = async (req, res) => {
 		res.status(500).json({ message: "Server error" });
 	}
 };
-export { insertUser, getbyemail };
+const createUser = async (req, res) => {
+	try {
+		const { name, email, age } = req.body;
+
+		// Validate the input data
+		if (!name || !email || !age) {
+			return res.status(400).json({ message: "All fields are required" });
+		}
+
+		// Create a new user
+		const newUser = await User.create({ name, email, age });
+
+		// Send the created user back in the response
+		res.status(201).json(newUser);
+	} catch (error) {
+		res.status(500).json({ message: "Server error" });
+	}
+};
+export { insertUser, getbyemail, createUser };
