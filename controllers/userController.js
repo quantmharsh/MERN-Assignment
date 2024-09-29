@@ -68,4 +68,14 @@ const createUser = async (req, res) => {
 		res.status(500).json({ message: "Server error" });
 	}
 };
-export { insertUser, getbyemail, createUser };
+const getAllUsers = async (req, res) => {
+	try {
+	  await connectDB(); // Ensure the DB connection is established
+	  const users = await User.find(); // Fetch all users
+	  res.status(200).json(users); // Send the users as JSON
+	} catch (error) {
+	  console.error('Error fetching users:', error);
+	  res.status(500).json({ message: 'Server error while fetching users' });
+	}
+  };
+export { insertUser, getbyemail, createUser ,getAllUsers };
